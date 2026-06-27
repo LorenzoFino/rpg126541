@@ -13,3 +13,6 @@ out/
 # OS
 .DS_Store
 Thumbs.db
+
+# File istruzioni AI (non per la consegna)
+CLAUDE.md
