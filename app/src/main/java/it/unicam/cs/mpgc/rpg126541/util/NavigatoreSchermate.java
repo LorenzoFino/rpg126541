@@ -24,11 +24,15 @@ public class NavigatoreSchermate {
     }
 
     /**
-     * Carica il file FXML della schermata indicata e lo mostra nello Stage.
+     * Carica il file FXML della schermata indicata, lo mostra nello Stage
+     * e restituisce il controller creato dall'FXMLLoader.
+     * Il chiamante può fare il cast al tipo concreto e iniettare i servizi
+     * tramite un metodo setter prima che l'utente interagisca.
      *
+     * @return il controller associato all'FXML caricato
      * @throws IOException se il file FXML non viene trovato o contiene errori
      */
-    public static void vai(AppScene schermata) throws IOException {
+    public static Object vai(AppScene schermata) throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 NavigatoreSchermate.class.getResource(schermata.getPathFxml())
         );
@@ -43,5 +47,6 @@ public class NavigatoreSchermate {
         }
 
         stage.setScene(scene);
+        return loader.getController();
     }
 }
