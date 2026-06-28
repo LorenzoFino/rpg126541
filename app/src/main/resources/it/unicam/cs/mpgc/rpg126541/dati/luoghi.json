@@ -1,0 +1,26 @@
+[
+  {
+    "id": "bar_ciangretta",
+    "nome": "Bar Ciangretta",
+    "descrizione": "Il quartier generale della famiglia. Tra caffè e fumo di sigarette si decide il destino di Palermo.",
+    "idMissione": "missione_debito"
+  },
+  {
+    "id": "porto",
+    "nome": "Porto di Palermo",
+    "descrizione": "Chi controlla il porto controlla i traffici. Per ora è territorio neutro.",
+    "idMissione": null
+  },
+  {
+    "id": "chiesa_santa_rosalia",
+    "nome": "Chiesa di Santa Rosalia",
+    "descrizione": "Anche il prete conosce i segreti del quartiere. Le confessioni valgono oro.",
+    "idMissione": null
+  },
+  {
+    "id": "bisca_monreale",
+    "nome": "Bisca di Monreale",
+    "descrizione": "Un retro sporco, tavoli verdi, facce che non vorresti incontrare di notte.",
+    "idMissione": null
+  }
+]

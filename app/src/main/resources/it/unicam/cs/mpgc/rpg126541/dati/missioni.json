@@ -1,0 +1,51 @@
+[
+  {
+    "id": "missione_debito",
+    "titolo": "Il Debito di Don Pino",
+    "scene": [
+      {
+        "id": "scena_incontro",
+        "testo": "Don Pino Ferrara siede nell'angolo del bar, la testa bassa sul caffè. Deve alla famiglia trecentomila lire da sei mesi. I tuoi uomini ti guardano: vogliono vedere che tipo di boss sei.",
+        "scelte": [
+          {
+            "testo": "«Don Pino, tre giorni. Non me li fate aspettare.» Voce bassa, sguardo fisso.",
+            "effetti": { "RISPETTO": 10, "LEALTA": -5 },
+            "idScenaSuccessiva": "scena_trattativa"
+          },
+          {
+            "testo": "Gli offri un accordo: metà subito, il resto entro il mese.",
+            "effetti": { "ASTUZIA": 8, "RICCHEZZA": 5 },
+            "idScenaSuccessiva": "scena_trattativa"
+          }
+        ]
+      },
+      {
+        "id": "scena_trattativa",
+        "testo": "Don Pino alza gli occhi. «Salvatore, tuo padre capiva certe difficoltà...» Si ferma. Capisce da solo che hai già deciso. La stanza è silenziosa.",
+        "scelte": [
+          {
+            "testo": "«Mio padre è morto. Io sono qui adesso.» Ti alzi e aspetti.",
+            "effetti": { "RISPETTO": 15 },
+            "idScenaSuccessiva": "scena_conclusione"
+          },
+          {
+            "testo": "«Mio padre capiva. Anch'io capisco. Ma la famiglia non aspetta.» Tono fermo, niente minacce.",
+            "effetti": { "ASTUZIA": 5, "LEALTA": 5 },
+            "idScenaSuccessiva": "scena_conclusione"
+          }
+        ]
+      },
+      {
+        "id": "scena_conclusione",
+        "testo": "Don Pino tira fuori un mazzo di banconote dal taschino interno. Non sono trecentomila, ma è un inizio. «Il resto entro venerdì, Salvatore.» Mentre esci, gli avventori ti aprono il passo senza che tu debba chiedere.",
+        "scelte": [
+          {
+            "testo": "Esci senza voltarti. A Palermo si parla più con i silenzi che con le parole.",
+            "effetti": { "RISPETTO": 5, "RICCHEZZA": 10 },
+            "idScenaSuccessiva": null
+          }
+        ]
+      }
+    ]
+  }
+]
