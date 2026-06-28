@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg126541.controller.MenuController"
+      alignment="CENTER" spacing="20">
+
+    <Label text="Legge del Silenzio" styleClass="titolo"/>
+
+    <Label text="[Menu principale — da implementare]" styleClass="testo-secondario"/>
+
+</VBox>

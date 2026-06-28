@@ -1,0 +1,297 @@
+/* ================================================================
+   LEGGE DEL SILENZIO — Stile noir siciliano, anni '50
+   Tutto lo stile dell'applicazione vive in questo file.
+
+   Palette:
+     Sfondo profondo  #0d0d0d
+     Sfondo pannelli  #1a1a1a
+     Oro / ambra      #c8a24b
+     Oro scuro        #a0832e  (pressed)
+     Bordeaux         #7b1f1f
+     Testo principale #e8e4d8
+     Testo secondario #8a8a8a
+     Bordo pannelli   #3a2e1a
+   ================================================================ */
+
+
+/* ── ROOT ──────────────────────────────────────────────────────── */
+
+.root {
+    -fx-background-color: #0d0d0d;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+}
+
+
+/* ── TESTI ─────────────────────────────────────────────────────── */
+
+/* Titolo principale (es. "Legge del Silenzio" nel menu) */
+.titolo {
+    -fx-font-size: 42px;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-text-fill: #c8a24b;
+    -fx-font-weight: bold;
+}
+
+/* Titolo di sezione (es. nome schermata, nome missione) */
+.sottotitolo {
+    -fx-font-size: 22px;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-text-fill: #c8a24b;
+}
+
+/* Testo narrativo delle scene */
+.testo-narrativo {
+    -fx-font-size: 15px;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-text-fill: #e8e4d8;
+    -fx-line-spacing: 4px;
+    -fx-wrap-text: true;
+}
+
+/* Testo di supporto, note, segnaposto */
+.testo-secondario {
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #8a8a8a;
+}
+
+/* Nome del giocatore o del personaggio (sans-serif, evidenziato) */
+.nome-personaggio {
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #e8e4d8;
+    -fx-font-weight: bold;
+}
+
+
+/* ── BOTTONI — stile di base ───────────────────────────────────── */
+/*
+   Sovrascriviamo il .button di JavaFX con il tema noir.
+   Bordo oro su sfondo antracite; hover inverte i colori.
+*/
+
+.button {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #c8a24b;
+    -fx-border-color: #c8a24b;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-padding: 10px 28px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #c8a24b;
+    -fx-text-fill: #0d0d0d;
+}
+
+.button:pressed {
+    -fx-background-color: #a0832e;
+    -fx-text-fill: #0d0d0d;
+}
+
+.button:focused {
+    -fx-border-color: #d4af37;
+    -fx-border-width: 1px;
+}
+
+
+/* ── BOTTONI — varianti specifiche ─────────────────────────────── */
+
+/*
+   Scelta narrativa: più ampia, testo serif corsivo,
+   bordo grigio che diventa oro all'hover.
+   Usata nella schermata scena per le scelte del giocatore.
+*/
+.bottone-scelta {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #e8e4d8;
+    -fx-border-color: #4a4a4a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-padding: 12px 32px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-style: italic;
+    -fx-cursor: hand;
+    -fx-min-width: 420px;
+    -fx-text-alignment: left;
+}
+
+.bottone-scelta:hover {
+    -fx-border-color: #c8a24b;
+    -fx-text-fill: #c8a24b;
+    -fx-background-color: #141414;
+}
+
+.bottone-scelta:pressed {
+    -fx-background-color: #0d0d0d;
+}
+
+/*
+   Scelta pericolosa: accento bordeaux.
+   Segnala al giocatore che la scelta è rischiosa.
+*/
+.bottone-pericolo {
+    -fx-background-color: #1a0a0a;
+    -fx-text-fill: #e8e4d8;
+    -fx-border-color: #7b1f1f;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-padding: 12px 32px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-style: italic;
+    -fx-cursor: hand;
+    -fx-min-width: 420px;
+}
+
+.bottone-pericolo:hover {
+    -fx-background-color: #7b1f1f;
+    -fx-text-fill: #e8e4d8;
+    -fx-border-color: #a02828;
+}
+
+.bottone-pericolo:pressed {
+    -fx-background-color: #5a1515;
+}
+
+/*
+   Luogo sulla mappa: più compatto, sfondo semi-trasparente.
+   L'hover lo evidenzia con il bordo oro.
+*/
+.bottone-luogo {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #e8e4d8;
+    -fx-border-color: #5a4a2a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-padding: 8px 16px;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-cursor: hand;
+}
+
+.bottone-luogo:hover {
+    -fx-border-color: #c8a24b;
+    -fx-text-fill: #c8a24b;
+    -fx-background-color: #222218;
+}
+
+.bottone-luogo:pressed {
+    -fx-background-color: #111110;
+}
+
+
+/* ── PANNELLO DOSSIER (statistiche) ────────────────────────────── */
+/*
+   Aspetto da "scheda criminale": sfondo quasi nero,
+   bordo oro sbiadito, padding generoso.
+*/
+
+.pannello-dossier {
+    -fx-background-color: #111111;
+    -fx-border-color: #3a2e1a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-padding: 16px;
+}
+
+/* Etichetta della statistica (es. "RISPETTO") — sans-serif, grigio */
+.etichetta-stat {
+    -fx-font-size: 10px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #8a8a8a;
+    -fx-font-weight: bold;
+}
+
+/* Valore numerico della statistica — sans-serif, crema */
+.valore-stat {
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #e8e4d8;
+}
+
+/* Badge del rango (es. "LUOGOTENENTE") — bordeaux */
+.etichetta-rango {
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #c87070;
+    -fx-font-weight: bold;
+}
+
+/* ProgressBar: traccia antracite, barra oro piatta (no bordi arrotondati) */
+.progress-bar {
+    -fx-pref-height: 6px;
+    -fx-min-height: 6px;
+    -fx-max-height: 6px;
+    -fx-background-radius: 0;
+}
+
+.progress-bar .track {
+    -fx-background-color: #2a2a2a;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #c8a24b;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+
+/* ── PANNELLO SCENA (testo narrativo) ──────────────────────────── */
+
+.pannello-scena {
+    -fx-background-color: #111111;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-padding: 24px;
+}
+
+
+/* ── SEPARATORE DECORATIVO ─────────────────────────────────────── */
+/* Linea oro sbiadita tra sezioni, stile dossier */
+
+.separatore {
+    -fx-background-color: #3a2e1a;
+    -fx-pref-height: 1px;
+    -fx-min-height: 1px;
+    -fx-max-height: 1px;
+}
+
+
+/* ── SCROLLPANE (per testi lunghi) ─────────────────────────────── */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #3a2e1a;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #1a1a1a;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: #1a1a1a;
+}
