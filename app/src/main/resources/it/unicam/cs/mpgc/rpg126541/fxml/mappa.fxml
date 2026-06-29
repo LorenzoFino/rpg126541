@@ -1,14 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg126541.controller.MappaController"
-      alignment="CENTER" spacing="20">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="it.unicam.cs.mpgc.rpg126541.controller.MappaController"
+            prefWidth="1024" prefHeight="768">
 
-    <Label text="Mappa di Palermo" styleClass="sottotitolo"/>
+    <!-- Header: titolo della schermata -->
+    <top>
+        <VBox styleClass="header-mappa" alignment="CENTER_LEFT" prefHeight="64">
+            <Label text="MAPPA DI PALERMO" styleClass="sottotitolo"/>
+            <Label text="Scegli dove andare" styleClass="testo-secondario"/>
+        </VBox>
+    </top>
 
-    <Label text="[Luoghi cliccabili — da implementare]" styleClass="testo-secondario"/>
+    <!-- Centro: area interattiva della mappa; i bottoni dei luoghi vengono aggiunti dal controller -->
+    <center>
+        <AnchorPane fx:id="areaMappa" styleClass="area-mappa">
+            <!-- Messaggio di stato: descrizione luogo o errore; appare in fondo alla mappa -->
+            <Label fx:id="labelStato" styleClass="testo-secondario"
+                   wrapText="true"
+                   AnchorPane.bottomAnchor="16"
+                   AnchorPane.leftAnchor="16"
+                   AnchorPane.rightAnchor="16"/>
+        </AnchorPane>
+    </center>
 
-</VBox>
+    <!-- Destra: pannello statistiche stile dossier criminale -->
+    <right>
+        <VBox styleClass="pannello-dossier" spacing="14" prefWidth="240" minWidth="240" maxWidth="240">
+
+            <Label fx:id="labelNome" styleClass="nome-personaggio" wrapText="true"/>
+            <Label fx:id="labelRango" styleClass="etichetta-rango"/>
+
+            <Region styleClass="separatore"/>
+
+            <!-- RISPETTO -->
+            <VBox spacing="4">
+                <Label text="RISPETTO" styleClass="etichetta-stat"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ProgressBar fx:id="barRispetto" prefWidth="160" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="valRispetto" styleClass="valore-stat"/>
+                </HBox>
+            </VBox>
+
+            <!-- RICCHEZZA -->
+            <VBox spacing="4">
+                <Label text="RICCHEZZA" styleClass="etichetta-stat"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ProgressBar fx:id="barRicchezza" prefWidth="160" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="valRicchezza" styleClass="valore-stat"/>
+                </HBox>
+            </VBox>
+
+            <!-- ASTUZIA -->
+            <VBox spacing="4">
+                <Label text="ASTUZIA" styleClass="etichetta-stat"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ProgressBar fx:id="barAstuzia" prefWidth="160" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="valAstuzia" styleClass="valore-stat"/>
+                </HBox>
+            </VBox>
+
+            <!-- LEALTÀ -->
+            <VBox spacing="4">
+                <Label text="LEALTÀ" styleClass="etichetta-stat"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ProgressBar fx:id="barLealta" prefWidth="160" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="valLealta" styleClass="valore-stat"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </right>
+
+</BorderPane>
