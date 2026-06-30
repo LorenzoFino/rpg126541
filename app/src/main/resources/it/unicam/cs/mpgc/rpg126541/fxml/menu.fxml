@@ -24,9 +24,9 @@
 
     <!-- Bottoni del menu, centrati, stessa larghezza -->
     <VBox alignment="CENTER" spacing="14">
-        <Button text="Nuova Partita"  onAction="#nuovaPartita"  prefWidth="240"/>
+        <Button text="Nuova Partita" onAction="#nuovaPartita" prefWidth="240"/>
         <Button text="Carica Partita" onAction="#caricaPartita" prefWidth="240"/>
-        <Button text="Esci"           onAction="#esci"          prefWidth="240"/>
+        <Button text="Esci" onAction="#esci" prefWidth="240"/>
     </VBox>
 
     <!-- Spazio inferiore: simmetrico al superiore -->

@@ -295,3 +295,19 @@
 .scroll-bar:vertical .decrement-button {
     -fx-background-color: #1a1a1a;
 }
+
+
+/* ── MAPPA DI PALERMO ──────────────────────────────────────────── */
+
+/* Area interattiva della mappa: sfondo leggermente più freddo del root */
+.area-mappa {
+    -fx-background-color: #0a0c10;
+}
+
+/* Striscia superiore con il titolo della schermata */
+.header-mappa {
+    -fx-background-color: #0d0d0d;
+    -fx-border-color: #3a2e1a;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 12px 24px;
+}

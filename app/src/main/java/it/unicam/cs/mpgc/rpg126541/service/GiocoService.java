@@ -1,8 +1,11 @@
 package it.unicam.cs.mpgc.rpg126541.service;
 
+import it.unicam.cs.mpgc.rpg126541.dto.LuogoDTO;
+import it.unicam.cs.mpgc.rpg126541.dto.ScenaDTO;
+import it.unicam.cs.mpgc.rpg126541.dto.StatisticheDTO;
 import it.unicam.cs.mpgc.rpg126541.model.Partita;
-import it.unicam.cs.mpgc.rpg126541.model.Scena;
-import it.unicam.cs.mpgc.rpg126541.model.Scelta;
+
+import java.util.List;
 
 /**
  * Orchestratore della logica di gioco.
@@ -21,14 +24,14 @@ public interface GiocoService {
      */
     void avviaMissione(String idMissione);
 
-    /** Restituisce la scena corrente della partita in corso. */
-    Scena getScenaCorrente();
+    /** Restituisce i dati della scena corrente pronti per la view (testo + lista scelte). */
+    ScenaDTO getScenaDTO();
 
     /**
-     * Applica la scelta del giocatore: aggiorna le statistiche e avanza
-     * alla scena successiva indicata nella scelta stessa.
+     * Applica la scelta all'indice dato nella lista della scena corrente:
+     * aggiorna le statistiche e avanza alla scena successiva.
      */
-    void applicaScelta(Scelta scelta);
+    void applicaScelta(int indiceScelta);
 
     /**
      * Restituisce true se la missione corrente è terminata,
@@ -38,4 +41,10 @@ public interface GiocoService {
 
     /** Restituisce lo stato completo della partita in corso. */
     Partita getPartita();
+
+    /** Restituisce uno snapshot delle statistiche del giocatore, pronto per la view. */
+    StatisticheDTO getStatisticheDTO();
+
+    /** Restituisce la lista dei luoghi della mappa come DTO, pronti per la view. */
+    List<LuogoDTO> getLuoghiDTO();
 }

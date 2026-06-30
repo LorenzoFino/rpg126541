@@ -1,6 +1,11 @@
 package it.unicam.cs.mpgc.rpg126541.service;
 
+import it.unicam.cs.mpgc.rpg126541.dto.LuogoDTO;
+import it.unicam.cs.mpgc.rpg126541.dto.SceltaDTO;
+import it.unicam.cs.mpgc.rpg126541.dto.ScenaDTO;
+import it.unicam.cs.mpgc.rpg126541.dto.StatisticheDTO;
 import it.unicam.cs.mpgc.rpg126541.model.Giocatore;
+import it.unicam.cs.mpgc.rpg126541.model.Luogo;
 import it.unicam.cs.mpgc.rpg126541.model.Missione;
 import it.unicam.cs.mpgc.rpg126541.model.Partita;
 import it.unicam.cs.mpgc.rpg126541.model.Rango;
@@ -32,10 +37,12 @@ public class GiocoServiceImpl implements GiocoService {
               && p.flagUguale("missione_debito_completata", "true");
 
     private final List<Missione> missioni;
+    private final List<Luogo> luoghi;
     private Partita partita;
 
     public GiocoServiceImpl(CaricatoreContenuti caricatore) {
         this.missioni = caricatore.caricaMissioni();
+        this.luoghi = caricatore.caricaLuoghi();
     }
 
     @Override
@@ -52,16 +59,20 @@ public class GiocoServiceImpl implements GiocoService {
     }
 
     @Override
-    public Scena getScenaCorrente() {
-        if (partita == null || partita.getIdScenaCorrente() == null) {
-            return null;
+    public ScenaDTO getScenaDTO() {
+        Scena scenaCorrente = getScenaCorrente();
+        List<SceltaDTO> scelteDTO = new java.util.ArrayList<>();
+        for (int i = 0; i < scenaCorrente.getScelte().size(); i++) {
+            scelteDTO.add(new SceltaDTO(scenaCorrente.getScelte().get(i).getTesto(), i));
         }
-        Missione missione = trovaMissione(partita.getIdMissioneCorrente());
-        return trovaScena(missione, partita.getIdScenaCorrente());
+        return new ScenaDTO(scenaCorrente.getTesto(), scelteDTO);
     }
 
     @Override
-    public void applicaScelta(Scelta scelta) {
+    public void applicaScelta(int indiceScelta) {
+        Scena scenaCorrente = getScenaCorrente();
+        Scelta scelta = scenaCorrente.getScelte().get(indiceScelta);
+
         // 1. Applica ogni effetto della scelta alle statistiche del giocatore
         for (Map.Entry<TipoStatistica, Integer> effetto : scelta.getEffetti().entrySet()) {
             partita.getGiocatore().modificaStatistica(effetto.getKey(), effetto.getValue());
@@ -79,6 +90,11 @@ public class GiocoServiceImpl implements GiocoService {
         aggiornaRango();
     }
 
+    private Scena getScenaCorrente() {
+        Missione missione = trovaMissione(partita.getIdMissioneCorrente());
+        return trovaScena(missione, partita.getIdScenaCorrente());
+    }
+
     @Override
     public boolean missioneTerminata() {
         return partita != null && partita.getIdScenaCorrente() == null;
@@ -87,6 +103,27 @@ public class GiocoServiceImpl implements GiocoService {
     @Override
     public Partita getPartita() {
         return partita;
+    }
+
+    @Override
+    public StatisticheDTO getStatisticheDTO() {
+        Giocatore g = partita.getGiocatore();
+        return new StatisticheDTO(
+                g.getNome(),
+                g.getStatistica(TipoStatistica.RISPETTO),
+                g.getStatistica(TipoStatistica.RICCHEZZA),
+                g.getStatistica(TipoStatistica.ASTUZIA),
+                g.getStatistica(TipoStatistica.LEALTA),
+                g.getRango().name()
+        );
+    }
+
+    @Override
+    public List<LuogoDTO> getLuoghiDTO() {
+        return luoghi.stream()
+                .map(l -> new LuogoDTO(l.getId(), l.getNome(), l.getDescrizione(),
+                        l.haMissione(), l.getIdMissione()))
+                .toList();
     }
 
     // --- metodi privati di supporto ---

@@ -32,7 +32,9 @@ public class MenuController {
     @FXML
     private void nuovaPartita() {
         try {
-            NavigatoreSchermate.vai(AppScene.MAPPA);
+            giocoService.nuovaPartita("Salvatore Ciangretta");
+            MappaController mappaController = (MappaController) NavigatoreSchermate.vai(AppScene.MAPPA);
+            mappaController.setServizi(giocoService, repositoryPartita);
         } catch (IOException e) {
             System.err.println("[Menu] Errore nel caricamento della mappa: " + e.getMessage());
         }
