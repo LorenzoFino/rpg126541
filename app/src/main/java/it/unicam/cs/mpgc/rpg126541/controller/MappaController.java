@@ -117,7 +117,10 @@ public class MappaController {
      */
     @FXML
     private void salvaPartita() {
-        TextInputDialog dialogo = new TextInputDialog("partita");
+        String slotDefault = giocoService.getPartita().getNomeSlotCorrente() != null
+                ? giocoService.getPartita().getNomeSlotCorrente()
+                : "partita";
+        TextInputDialog dialogo = new TextInputDialog(slotDefault);
         dialogo.setTitle("Salva Partita");
         dialogo.setHeaderText(null);
         dialogo.setContentText("Nome del salvataggio:");

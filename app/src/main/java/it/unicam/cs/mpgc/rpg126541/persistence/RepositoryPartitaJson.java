@@ -33,6 +33,7 @@ public class RepositoryPartitaJson implements RepositoryPartita {
         File file = new File(cartella, nomeSlot + ESTENSIONE);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             gson.toJson(partita, writer);
+            partita.setNomeSlotCorrente(nomeSlot);
         } catch (IOException e) {
             System.err.println("Errore nel salvataggio di '" + nomeSlot + "': " + e.getMessage());
         }
@@ -46,7 +47,11 @@ public class RepositoryPartitaJson implements RepositoryPartita {
             return null;
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            return gson.fromJson(reader, Partita.class);
+            Partita partita = gson.fromJson(reader, Partita.class);
+            if (partita != null) {
+                partita.setNomeSlotCorrente(nomeSlot);
+            }
+            return partita;
         } catch (IOException e) {
             System.err.println("Errore nel caricamento di '" + nomeSlot + "': " + e.getMessage());
             return null;

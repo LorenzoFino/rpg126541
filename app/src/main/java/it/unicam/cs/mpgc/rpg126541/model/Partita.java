@@ -14,6 +14,7 @@ public class Partita {
     private final Giocatore giocatore;
     private String idMissioneCorrente;
     private String idScenaCorrente;
+    private String nomeSlotCorrente;
     private final Map<String, String> flag;
 
     public Partita(Giocatore giocatore) {
@@ -41,6 +42,14 @@ public class Partita {
 
     public void setIdScenaCorrente(String idScenaCorrente) {
         this.idScenaCorrente = idScenaCorrente;
+    }
+
+    public String getNomeSlotCorrente() {
+        return nomeSlotCorrente;
+    }
+
+    public void setNomeSlotCorrente(String nomeSlotCorrente) {
+        this.nomeSlotCorrente = nomeSlotCorrente;
     }
 
     /** Imposta un flag di gioco (es. "porto_accordo" → "completato"). */
