@@ -106,6 +106,11 @@ public class GiocoServiceImpl implements GiocoService {
     }
 
     @Override
+    public void impostaPartita(Partita partita) {
+        this.partita = partita;
+    }
+
+    @Override
     public StatisticheDTO getStatisticheDTO() {
         Giocatore g = partita.getGiocatore();
         return new StatisticheDTO(

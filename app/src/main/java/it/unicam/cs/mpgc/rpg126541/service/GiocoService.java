@@ -42,6 +42,9 @@ public interface GiocoService {
     /** Restituisce lo stato completo della partita in corso. */
     Partita getPartita();
 
+    /** Ripristina lo stato di gioco da una partita caricata da file. */
+    void impostaPartita(Partita partita);
+
     /** Restituisce uno snapshot delle statistiche del giocatore, pronto per la view. */
     StatisticheDTO getStatisticheDTO();
 

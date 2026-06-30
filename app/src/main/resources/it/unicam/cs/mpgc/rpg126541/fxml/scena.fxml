@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 
@@ -12,12 +13,15 @@
             fx:controller="it.unicam.cs.mpgc.rpg126541.controller.ScenaController"
             prefWidth="1024" prefHeight="768">
 
-    <!-- Header: titolo schermata -->
+    <!-- Header: titolo a sinistra, bottone salva a destra -->
     <top>
-        <VBox styleClass="header-mappa" alignment="CENTER_LEFT" prefHeight="64">
-            <Label text="LEGGE DEL SILENZIO" styleClass="sottotitolo"/>
-            <Label text="In missione" styleClass="testo-secondario"/>
-        </VBox>
+        <HBox styleClass="header-mappa" alignment="CENTER_LEFT" prefHeight="64" spacing="16">
+            <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                <Label text="LEGGE DEL SILENZIO" styleClass="sottotitolo"/>
+                <Label text="In missione" styleClass="testo-secondario"/>
+            </VBox>
+            <Button text="Salva Partita" onAction="#salvaPartita"/>
+        </HBox>
     </top>
 
     <!-- Centro: testo narrativo + bottoni scelte -->

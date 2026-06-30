@@ -7,12 +7,15 @@ import it.unicam.cs.mpgc.rpg126541.service.GiocoService;
 import it.unicam.cs.mpgc.rpg126541.util.AppScene;
 import it.unicam.cs.mpgc.rpg126541.util.NavigatoreSchermate;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Controller della mappa di Palermo.
@@ -106,6 +109,32 @@ public class MappaController {
         } catch (IOException e) {
             System.err.println("[Mappa] Errore nel caricamento della scena: " + e.getMessage());
         }
+    }
+
+    /**
+     * Chiede all'utente un nome per lo slot e salva la partita corrente su file.
+     * Mostra una conferma se il salvataggio va a buon fine.
+     */
+    @FXML
+    private void salvaPartita() {
+        TextInputDialog dialogo = new TextInputDialog("partita");
+        dialogo.setTitle("Salva Partita");
+        dialogo.setHeaderText(null);
+        dialogo.setContentText("Nome del salvataggio:");
+        Optional<String> nomeSlot = dialogo.showAndWait();
+
+        if (nomeSlot.isEmpty() || nomeSlot.get().isBlank()) {
+            return; // l'utente ha annullato o lasciato il campo vuoto
+        }
+
+        String slot = nomeSlot.get().trim();
+        repositoryPartita.salva(giocoService.getPartita(), slot);
+
+        Alert conferma = new Alert(Alert.AlertType.INFORMATION);
+        conferma.setTitle("Salvato");
+        conferma.setHeaderText(null);
+        conferma.setContentText("Partita salvata in «" + slot + "».");
+        conferma.showAndWait();
     }
 
     /**

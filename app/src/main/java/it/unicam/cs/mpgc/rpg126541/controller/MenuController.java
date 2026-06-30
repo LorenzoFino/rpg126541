@@ -1,29 +1,28 @@
 package it.unicam.cs.mpgc.rpg126541.controller;
 
+import it.unicam.cs.mpgc.rpg126541.model.Partita;
 import it.unicam.cs.mpgc.rpg126541.persistence.RepositoryPartita;
 import it.unicam.cs.mpgc.rpg126541.service.GiocoService;
 import it.unicam.cs.mpgc.rpg126541.util.AppScene;
 import it.unicam.cs.mpgc.rpg126541.util.NavigatoreSchermate;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller del menu principale.
- * Riceve i servizi tramite setServizi(): dipende dalle interfacce (DIP),
- * non dalle implementazioni concrete, che vengono create solo in Main.
+ * Gestisce nuova partita, caricamento da file ed uscita.
  */
 public class MenuController {
 
     private GiocoService giocoService;
     private RepositoryPartita repositoryPartita;
 
-    /**
-     * Chiamato da Main dopo aver caricato l'FXML.
-     * Passa le dipendenze come interfacce: il controller non sa
-     * (e non deve sapere) quale implementazione concreta sta usando.
-     */
     public void setServizi(GiocoService giocoService, RepositoryPartita repositoryPartita) {
         this.giocoService = giocoService;
         this.repositoryPartita = repositoryPartita;
@@ -42,9 +41,58 @@ public class MenuController {
 
     @FXML
     private void caricaPartita() {
-        // TODO: mostrare la lista dei salvataggi e caricare la partita scelta.
-        // repositoryPartita.salvataggiDisponibili() restituirà gli slot esistenti.
-        System.out.println("[Menu] Carica partita: funzionalità da implementare.");
+        List<String> slots = repositoryPartita.salvataggiDisponibili();
+
+        if (slots.isEmpty()) {
+            Alert avviso = new Alert(Alert.AlertType.INFORMATION);
+            avviso.setTitle("Nessun salvataggio");
+            avviso.setHeaderText(null);
+            avviso.setContentText("Non ci sono partite salvate.");
+            avviso.showAndWait();
+            return;
+        }
+
+        ChoiceDialog<String> dialogo = new ChoiceDialog<>(slots.get(0), slots);
+        dialogo.setTitle("Carica Partita");
+        dialogo.setHeaderText(null);
+        dialogo.setContentText("Scegli il salvataggio:");
+        Optional<String> scelta = dialogo.showAndWait();
+
+        if (scelta.isEmpty()) {
+            return; // l'utente ha premuto Annulla
+        }
+
+        Partita partitaCaricata = repositoryPartita.carica(scelta.get());
+        if (partitaCaricata == null) {
+            Alert errore = new Alert(Alert.AlertType.ERROR);
+            errore.setTitle("Errore");
+            errore.setHeaderText(null);
+            errore.setContentText("File di salvataggio corrotto o non leggibile.");
+            errore.showAndWait();
+            return;
+        }
+
+        giocoService.impostaPartita(partitaCaricata);
+        navigaDopoCaricamento(partitaCaricata);
+    }
+
+    /**
+     * Naviga alla scena corretta dopo il caricamento:
+     * se era nel mezzo di una missione torna alla scena interrotta,
+     * altrimenti va alla mappa.
+     */
+    private void navigaDopoCaricamento(Partita partita) {
+        try {
+            if (partita.getIdScenaCorrente() != null) {
+                ScenaController scenaController = (ScenaController) NavigatoreSchermate.vai(AppScene.SCENA);
+                scenaController.setServizi(giocoService, repositoryPartita);
+            } else {
+                MappaController mappaController = (MappaController) NavigatoreSchermate.vai(AppScene.MAPPA);
+                mappaController.setServizi(giocoService, repositoryPartita);
+            }
+        } catch (IOException e) {
+            System.err.println("[Menu] Errore nel caricamento della schermata: " + e.getMessage());
+        }
     }
 
     @FXML

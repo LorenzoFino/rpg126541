@@ -8,13 +8,16 @@ import it.unicam.cs.mpgc.rpg126541.service.GiocoService;
 import it.unicam.cs.mpgc.rpg126541.util.AppScene;
 import it.unicam.cs.mpgc.rpg126541.util.NavigatoreSchermate;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller della schermata di gioco.
@@ -104,6 +107,32 @@ public class ScenaController {
         } else {
             mostraScenaCorrente();
         }
+    }
+
+    /**
+     * Chiede all'utente un nome per lo slot e salva la partita corrente su file.
+     * Mostra una conferma se il salvataggio va a buon fine.
+     */
+    @FXML
+    private void salvaPartita() {
+        TextInputDialog dialogo = new TextInputDialog("partita");
+        dialogo.setTitle("Salva Partita");
+        dialogo.setHeaderText(null);
+        dialogo.setContentText("Nome del salvataggio:");
+        Optional<String> nomeSlot = dialogo.showAndWait();
+
+        if (nomeSlot.isEmpty() || nomeSlot.get().isBlank()) {
+            return;
+        }
+
+        String slot = nomeSlot.get().trim();
+        repositoryPartita.salva(giocoService.getPartita(), slot);
+
+        Alert conferma = new Alert(Alert.AlertType.INFORMATION);
+        conferma.setTitle("Salvato");
+        conferma.setHeaderText(null);
+        conferma.setContentText("Partita salvata in «" + slot + "».");
+        conferma.showAndWait();
     }
 
     /** Naviga alla schermata mappa e le inietta i servizi aggiornati. */

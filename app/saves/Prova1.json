@@ -1,0 +1,17 @@
+{
+  "giocatore": {
+    "id": "6c0b4d78-fc4e-46c7-b83e-1b43390a0757",
+    "nome": "Salvatore Ciangretta",
+    "statistiche": {
+      "RISPETTO": 85,
+      "RICCHEZZA": 75,
+      "ASTUZIA": 63,
+      "LEALTA": 50
+    },
+    "rango": "LUOGOTENENTE"
+  },
+  "idMissioneCorrente": "missione_debito",
+  "flag": {
+    "missione_debito_completata": "true"
+  }
+}
