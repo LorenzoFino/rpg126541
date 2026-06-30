@@ -1,47 +1,199 @@
 [
   {
-    "id": "missione_debito",
-    "titolo": "Il Debito di Don Pino",
+    "id": "missione_primo_incontro",
+    "titolo": "Il Primo Incontro",
     "scene": [
       {
-        "id": "scena_incontro",
-        "testo": "Don Pino Ferrara siede nell'angolo del bar, la testa bassa sul caffè. Deve alla famiglia trecentomila lire da sei mesi. I tuoi uomini ti guardano: vogliono vedere che tipo di boss sei.",
+        "id": "pi_scena_raduno",
+        "testo": "Il giorno dopo il funerale di tuo padre, gli uomini della famiglia Ciangretta si radunano al bar. Sono in silenzio: ti guardano. Qualcuno con rispetto, qualcuno con dubbio. Toccherà a te spiegare come stanno le cose adesso.",
         "scelte": [
           {
-            "testo": "«Don Pino, tre giorni. Non me li fate aspettare.» Voce bassa, sguardo fisso.",
+            "testo": "Parli poco. Guardi dritto negli occhi ognuno, uno a uno. La presenza vale più delle parole.",
+            "effetti": { "RISPETTO": 15, "LEALTA": 5 },
+            "idScenaSuccessiva": "pi_scena_contestazione"
+          },
+          {
+            "testo": "Fai un discorso breve: la famiglia continua, la stabilità è tutto. Prometti che niente cambierà.",
+            "effetti": { "LEALTA": 15, "RISPETTO": -5 },
+            "idScenaSuccessiva": "pi_scena_contestazione"
+          }
+        ]
+      },
+      {
+        "id": "pi_scena_contestazione",
+        "testo": "Turi Mancuso, il luogotenente più anziano, alza la voce: «Sei giovane, Salvatore. Tuo padre ci ha messo vent'anni a costruire questo. Chi ci dice che tu sappia tenerlo?» Qualcuno annuisce, qualcuno abbassa gli occhi.",
+        "scelte": [
+          {
+            "testo": "«Il vecchio è morto. Siediti, Turi, o trovati un altro posto.» Voce piatta, sguardo fermo.",
+            "effetti": { "RISPETTO": 20, "LEALTA": -10 },
+            "idScenaSuccessiva": "pi_scena_prima_decisione"
+          },
+          {
+            "testo": "«Hai ragione. Per questo ho bisogno della tua esperienza, non contro di me.» Lo includi, non lo schiacci.",
+            "effetti": { "ASTUZIA": 15, "LEALTA": 10 },
+            "idScenaSuccessiva": "pi_scena_prima_decisione"
+          }
+        ]
+      },
+      {
+        "id": "pi_scena_prima_decisione",
+        "testo": "La sera porta la prima notizia concreta: un commerciante del Capo ha smesso di pagare la protezione. Dice che «le cose sono cambiate». Gli uomini aspettano la tua parola.",
+        "scelte": [
+          {
+            "testo": "Mandi due uomini stanotte. Messaggio senza sangue, ma chiaro.",
+            "effetti": { "RISPETTO": 10, "RICCHEZZA": 10 },
+            "idScenaSuccessiva": null
+          },
+          {
+            "testo": "Vai di persona. Se gli uomini ti vedono in prima linea, capiscono chi sei.",
+            "effetti": { "RISPETTO": 20, "RICCHEZZA": 5, "ASTUZIA": -5 },
+            "idScenaSuccessiva": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "missione_guardia_corrotta",
+    "titolo": "La Guardia Corrotta",
+    "scene": [
+      {
+        "id": "gc_scena_approccio",
+        "testo": "Al porto di Palermo, l'ispettore Basile fa i controlli ogni lunedì mattina. Da sei mesi chiude gli occhi sui carichi della famiglia, ma da questo mese vuole il doppio. I tuoi uomini al porto ti avvisano: o si accontenta, o diventa un problema.",
+        "scelte": [
+          {
+            "testo": "Mandi un intermediario con la metà di quello che chiede. Vediamo come reagisce.",
+            "effetti": { "ASTUZIA": 10, "RICCHEZZA": -5 },
+            "idScenaSuccessiva": "gc_scena_incontro"
+          },
+          {
+            "testo": "Lo cerchi di persona. Un ispettore che mercanteggia è uno che ha paura. Vuoi vedere la sua faccia.",
+            "effetti": { "RISPETTO": 5, "ASTUZIA": 5 },
+            "idScenaSuccessiva": "gc_scena_incontro"
+          }
+        ]
+      },
+      {
+        "id": "gc_scena_incontro",
+        "testo": "Incontrate Basile in un magazzino vuoto vicino alle banchine. L'ispettore suda, ma fa il duro: «La mia richiesta è quella. O pagate o faccio un rapporto sul vostro deposito.» Dietro di lui, silenzio. Non ha coperture.",
+        "scelte": [
+          {
+            "testo": "«Ispettore, lei sta parlando con la famiglia Ciangretta. Ha capito?» Un tono basso vale mille minacce.",
+            "effetti": { "RISPETTO": 15, "RICCHEZZA": -5 },
+            "idScenaSuccessiva": "gc_scena_accordo"
+          },
+          {
+            "testo": "«La sua famiglia, ispettore. Come sta? Vive ancora in via Notarbartolo?» Sorriso, nient'altro.",
+            "effetti": { "ASTUZIA": 20, "RISPETTO": 5 },
+            "idScenaSuccessiva": "gc_scena_accordo"
+          }
+        ]
+      },
+      {
+        "id": "gc_scena_accordo",
+        "testo": "Basile abbassa gli occhi. Accetta la cifra originale, con un aumento minimo. Mentre te ne vai, ti fermi un momento sulla banchina: il porto odora di sale e di compromessi. Ogni lunedì, d'ora in poi, sarà così.",
+        "scelte": [
+          {
+            "testo": "Un accordo sporco è sempre un accordo. Il porto è sotto controllo.",
+            "effetti": { "RICCHEZZA": 15, "LEALTA": 5 },
+            "idScenaSuccessiva": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "missione_traditore",
+    "titolo": "Il Traditore",
+    "scene": [
+      {
+        "id": "tr_scena_voce",
+        "testo": "Alla bisca di Monreale, qualcuno parla troppo. La voce è arrivata ai tuoi: Nino Parrino, uomo di medio rango, sta passando informazioni ai Ferrandino, la famiglia rivale del Capo. Non hai prove, solo voci. Ma le voci a Palermo raramente mentono.",
+        "scelte": [
+          {
+            "testo": "Fai sorvegliare Nino per tre giorni senza dirgelo. Aspetti prove concrete.",
+            "effetti": { "ASTUZIA": 15 },
+            "idScenaSuccessiva": "tr_scena_confronto"
+          },
+          {
+            "testo": "Lo fai chiamare subito. Un traditore lasciato libero è un cancro.",
             "effetti": { "RISPETTO": 10, "LEALTA": -5 },
-            "idScenaSuccessiva": "scena_trattativa"
-          },
-          {
-            "testo": "Gli offri un accordo: metà subito, il resto entro il mese.",
-            "effetti": { "ASTUZIA": 8, "RICCHEZZA": 5 },
-            "idScenaSuccessiva": "scena_trattativa"
+            "idScenaSuccessiva": "tr_scena_confronto"
           }
         ]
       },
       {
-        "id": "scena_trattativa",
-        "testo": "Don Pino alza gli occhi. «Salvatore, tuo padre capiva certe difficoltà...» Si ferma. Capisce da solo che hai già deciso. La stanza è silenziosa.",
+        "id": "tr_scena_confronto",
+        "testo": "Nino è davanti a te, nella stanza sul retro della bisca. Suda. «Salvatore, giuro sui miei figli, non ho fatto niente.» Poi abbassa gli occhi. È quel momento di silenzio che dice tutto.",
         "scelte": [
           {
-            "testo": "«Mio padre è morto. Io sono qui adesso.» Ti alzi e aspetti.",
-            "effetti": { "RISPETTO": 15 },
-            "idScenaSuccessiva": "scena_conclusione"
+            "testo": "«Nino. Guardami.» Aspetti. Lui non regge lo sguardo. «Chi ti ha pagato?»",
+            "effetti": { "ASTUZIA": 10, "RISPETTO": 10 },
+            "idScenaSuccessiva": "tr_scena_verdetto"
           },
           {
-            "testo": "«Mio padre capiva. Anch'io capisco. Ma la famiglia non aspetta.» Tono fermo, niente minacce.",
-            "effetti": { "ASTUZIA": 5, "LEALTA": 5 },
-            "idScenaSuccessiva": "scena_conclusione"
+            "testo": "Non fai domande. «Vai. Non voglio vederti più a Palermo.»",
+            "effetti": { "RISPETTO": 15, "LEALTA": 10 },
+            "idScenaSuccessiva": "tr_scena_verdetto"
           }
         ]
       },
       {
-        "id": "scena_conclusione",
-        "testo": "Don Pino tira fuori un mazzo di banconote dal taschino interno. Non sono trecentomila, ma è un inizio. «Il resto entro venerdì, Salvatore.» Mentre esci, gli avventori ti aprono il passo senza che tu debba chiedere.",
+        "id": "tr_scena_verdetto",
+        "testo": "La notizia si sparge in poche ore: Nino ha lasciato Palermo. Gli uomini non fanno domande. Sanno. Turi Mancuso ti raggiunge la sera e ti stringe la mano senza parlare. Vale più di un discorso.",
         "scelte": [
           {
-            "testo": "Esci senza voltarti. A Palermo si parla più con i silenzi che con le parole.",
-            "effetti": { "RISPETTO": 5, "RICCHEZZA": 10 },
+            "testo": "La famiglia è più compatta adesso. Il prezzo era questo.",
+            "effetti": { "LEALTA": 15, "RISPETTO": 10 },
+            "idScenaSuccessiva": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "missione_resa_dei_conti",
+    "titolo": "La Resa dei Conti",
+    "scene": [
+      {
+        "id": "rc_scena_messaggio",
+        "testo": "Don Rosario Ferrandino ti fa recapitare un messaggio tramite il parroco di Santa Rosalia: vuole un incontro. Neutro, in chiesa, senza armi. I Ferrandino fanno pressioni sul tuo territorio da settimane. Questo incontro può essere la pace o la guerra.",
+        "scelte": [
+          {
+            "testo": "Accetti. Chi rifiuta un incontro ha paura. Tu no.",
+            "effetti": { "RISPETTO": 10, "ASTUZIA": 5 },
+            "idScenaSuccessiva": "rc_scena_chiesa"
+          },
+          {
+            "testo": "Accetti, ma mandi un esploratore prima. Vuoi sapere se ci sono uomini di Ferrandino nei paraggi.",
+            "effetti": { "ASTUZIA": 15 },
+            "idScenaSuccessiva": "rc_scena_chiesa"
+          }
+        ]
+      },
+      {
+        "id": "rc_scena_chiesa",
+        "testo": "La chiesa è deserta. Solo don Rosario, il prete, e tu. Ferrandino parla lentamente: «Palermo è grande, Salvatore. Il porto per te, l'Albergheria per noi. Nessuna guerra.» Ti tende la mano. Dietro di lui, il crocifisso guarda dall'alto.",
+        "scelte": [
+          {
+            "testo": "Stringi la mano. «Ci vediamo tra un mese per confermare gli accordi.» La pace vale più della vittoria.",
+            "effetti": { "ASTUZIA": 10, "RICCHEZZA": 10, "RISPETTO": -5 },
+            "idScenaSuccessiva": "rc_scena_esito"
+          },
+          {
+            "testo": "«Don Rosario, il porto lo teniamo già. E l'Albergheria... ci penseremo.» Non firmi niente oggi.",
+            "effetti": { "RISPETTO": 20, "ASTUZIA": 5, "RICCHEZZA": -5 },
+            "idScenaSuccessiva": "rc_scena_esito"
+          }
+        ]
+      },
+      {
+        "id": "rc_scena_esito",
+        "testo": "Esci dalla chiesa nel sole bianco di Palermo. Il parroco chiude la porta alle tue spalle. Qualunque cosa sia successa dentro, fuori il quartiere ti guarda. Sei il capo. Lo sanno tutti, adesso.",
+        "scelte": [
+          {
+            "testo": "La strada è lunga. Ma il primo passo è fatto.",
+            "effetti": { "RISPETTO": 10, "LEALTA": 10 },
             "idScenaSuccessiva": null
           }
         ]
