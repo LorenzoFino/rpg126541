@@ -26,15 +26,19 @@ import java.util.UUID;
 public class GiocoServiceImpl implements GiocoService {
 
     // Condizioni di avanzamento: modificare qui per cambiare le regole di progressione.
-    // Per LUOGOTENENTE basta avere abbastanza Rispetto.
+    // Per LUOGOTENENTE serve abbastanza Rispetto E aver chiuso il primo capitolo della storia
+    // (senza il vincolo sulla missione, il Rispetto da solo può superare la soglia già a metà
+    // della prima missione, promuovendo il giocatore troppo presto).
     private static final CondizioneAvanzamento CONDIZIONE_LUOGOTENENTE =
-            p -> p.getGiocatore().getStatistica(TipoStatistica.RISPETTO) >= 70;
+            p -> p.getGiocatore().getStatistica(TipoStatistica.RISPETTO) >= 70
+              && p.flagUguale("missione_primo_incontro_completata", "true");
 
-    // Per BOSS servono Rispetto alto, Lealtà solida E aver completato la prima missione.
+    // Per BOSS servono Rispetto molto alto, Lealtà molto alta E aver completato l'ultima
+    // missione (la resa dei conti con i Ferrandino, il vero traguardo della storia).
     private static final CondizioneAvanzamento CONDIZIONE_BOSS =
-            p -> p.getGiocatore().getStatistica(TipoStatistica.RISPETTO) >= 90
-              && p.getGiocatore().getStatistica(TipoStatistica.LEALTA) >= 65
-              && p.flagUguale("missione_debito_completata", "true");
+            p -> p.getGiocatore().getStatistica(TipoStatistica.RISPETTO) >= 95
+              && p.getGiocatore().getStatistica(TipoStatistica.LEALTA) >= 90
+              && p.flagUguale("missione_resa_dei_conti_completata", "true");
 
     private final List<Missione> missioni;
     private final List<Luogo> luoghi;
