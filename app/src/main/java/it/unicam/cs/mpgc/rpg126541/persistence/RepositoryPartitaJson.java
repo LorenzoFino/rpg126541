@@ -15,18 +15,24 @@ import java.util.List;
  */
 public class RepositoryPartitaJson implements RepositoryPartita {
 
-    private static final String CARTELLA_SALVATAGGI = "saves";
     private static final String ESTENSIONE = ".json";
 
     private final Gson gson;
+    private final String cartellaSalvataggi;
 
     public RepositoryPartitaJson() {
+        this("saves");
+    }
+
+    /** Costruttore che permette di scegliere la cartella di salvataggio (utile nei test). */
+    public RepositoryPartitaJson(String cartellaSalvataggi) {
+        this.cartellaSalvataggi = cartellaSalvataggi;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
     @Override
     public void salva(Partita partita, String nomeSlot) {
-        File cartella = new File(CARTELLA_SALVATAGGI);
+        File cartella = new File(cartellaSalvataggi);
         if (!cartella.exists()) {
             cartella.mkdirs();
         }
@@ -41,7 +47,7 @@ public class RepositoryPartitaJson implements RepositoryPartita {
 
     @Override
     public Partita carica(String nomeSlot) {
-        File file = new File(CARTELLA_SALVATAGGI, nomeSlot + ESTENSIONE);
+        File file = new File(cartellaSalvataggi, nomeSlot + ESTENSIONE);
         if (!file.exists()) {
             System.err.println("Salvataggio '" + nomeSlot + "' non trovato.");
             return null;
@@ -63,7 +69,7 @@ public class RepositoryPartitaJson implements RepositoryPartita {
 
     @Override
     public List<String> salvataggiDisponibili() {
-        File cartella = new File(CARTELLA_SALVATAGGI);
+        File cartella = new File(cartellaSalvataggi);
         List<String> nomi = new ArrayList<>();
         if (!cartella.exists() || !cartella.isDirectory()) {
             return nomi;
