@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -27,12 +29,21 @@
     <!-- Centro: area interattiva della mappa; i bottoni dei luoghi vengono aggiunti dal controller -->
     <center>
         <AnchorPane fx:id="areaMappa" styleClass="area-mappa">
-            <!-- Messaggio di stato: descrizione luogo o errore; appare in fondo alla mappa -->
-            <Label fx:id="labelStato" styleClass="testo-secondario"
-                   wrapText="true"
-                   AnchorPane.bottomAnchor="16"
-                   AnchorPane.leftAnchor="16"
-                   AnchorPane.rightAnchor="16"/>
+
+            <!-- Sfondo della mappa: dietro ai bottoni dei luoghi -->
+            <ImageView fitWidth="784" fitHeight="704" preserveRatio="true"
+                       AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+                <image>
+                    <Image url="@../immagini/sfondo_mappa.png" backgroundLoading="true"/>
+                </image>
+            </ImageView>
+
+            <!-- Barra di stato: immagine del luogo selezionato + descrizione o errore -->
+            <HBox spacing="12" alignment="CENTER_LEFT"
+                  AnchorPane.bottomAnchor="16" AnchorPane.leftAnchor="16" AnchorPane.rightAnchor="16">
+                <ImageView fx:id="imageLuogo" fitWidth="80" fitHeight="80" preserveRatio="true"/>
+                <Label fx:id="labelStato" styleClass="testo-secondario" wrapText="true" HBox.hgrow="ALWAYS"/>
+            </HBox>
         </AnchorPane>
     </center>
 
@@ -40,8 +51,17 @@
     <right>
         <VBox styleClass="pannello-dossier" spacing="14" prefWidth="240" minWidth="240" maxWidth="240">
 
-            <Label fx:id="labelNome" styleClass="nome-personaggio" wrapText="true"/>
-            <Label fx:id="labelRango" styleClass="etichetta-rango"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ImageView fitWidth="80" fitHeight="120" preserveRatio="true">
+                    <image>
+                        <Image url="@../immagini/ritratto_salvatore.png" backgroundLoading="true"/>
+                    </image>
+                </ImageView>
+                <VBox spacing="4">
+                    <Label fx:id="labelNome" styleClass="nome-personaggio" wrapText="true"/>
+                    <Label fx:id="labelRango" styleClass="etichetta-rango"/>
+                </VBox>
+            </HBox>
 
             <Region styleClass="separatore"/>
 

@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg126541.controller.MenuController"
-      alignment="CENTER" spacing="0"
-      prefWidth="1024" prefHeight="768">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="it.unicam.cs.mpgc.rpg126541.controller.MenuController"
+           prefWidth="1024" prefHeight="768">
 
-    <!-- Spazio superiore: occupa tutto lo spazio residuo sopra il contenuto -->
-    <Region VBox.vgrow="ALWAYS"/>
+    <!-- Sfondo del menu: copre tutta la finestra, dietro a tutti gli altri elementi -->
+    <ImageView fitWidth="1024" fitHeight="768" preserveRatio="true">
+        <image>
+            <Image url="@../immagini/sfondo_menu.png" backgroundLoading="true"/>
+        </image>
+    </ImageView>
 
-    <!-- Titolo e sottotitolo atmosferico -->
-    <VBox alignment="CENTER" spacing="10">
-        <Label text="Legge del Silenzio" styleClass="titolo"/>
-        <Label text="Palermo, 1953" styleClass="testo-secondario"/>
+    <VBox alignment="CENTER" spacing="0">
+
+        <!-- Spazio superiore: occupa tutto lo spazio residuo sopra il contenuto -->
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <!-- Titolo e sottotitolo atmosferico -->
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Legge del Silenzio" styleClass="titolo"/>
+            <Label text="Palermo, 1953" styleClass="testo-secondario"/>
+        </VBox>
+
+        <!-- Separazione fissa tra titolo e bottoni -->
+        <Region prefHeight="64" minHeight="64" maxHeight="64"/>
+
+        <!-- Bottoni del menu, centrati, stessa larghezza -->
+        <VBox alignment="CENTER" spacing="14">
+            <Button text="Nuova Partita" onAction="#nuovaPartita" prefWidth="240"/>
+            <Button text="Carica Partita" onAction="#caricaPartita" prefWidth="240"/>
+            <Button text="Esci" onAction="#esci" prefWidth="240"/>
+        </VBox>
+
+        <!-- Spazio inferiore: simmetrico al superiore -->
+        <Region VBox.vgrow="ALWAYS"/>
+
     </VBox>
 
-    <!-- Separazione fissa tra titolo e bottoni -->
-    <Region prefHeight="64" minHeight="64" maxHeight="64"/>
-
-    <!-- Bottoni del menu, centrati, stessa larghezza -->
-    <VBox alignment="CENTER" spacing="14">
-        <Button text="Nuova Partita" onAction="#nuovaPartita" prefWidth="240"/>
-        <Button text="Carica Partita" onAction="#caricaPartita" prefWidth="240"/>
-        <Button text="Esci" onAction="#esci" prefWidth="240"/>
-    </VBox>
-
-    <!-- Spazio inferiore: simmetrico al superiore -->
-    <Region VBox.vgrow="ALWAYS"/>
-
-</VBox>
+</StackPane>

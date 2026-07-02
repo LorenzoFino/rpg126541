@@ -188,6 +188,20 @@
     -fx-background-color: #111110;
 }
 
+/* Missione già completata: bordo verde scuro, testo grigio, sbiadito */
+.bottone-completato {
+    -fx-border-color: #2e5a3a;
+    -fx-text-fill: #7a7a7a;
+    -fx-opacity: 0.6;
+}
+
+/* Missione disponibile ora: bordo oro più spesso e luminoso per farla risaltare */
+.bottone-disponibile {
+    -fx-border-color: #e8c265;
+    -fx-border-width: 2px;
+    -fx-text-fill: #e8c265;
+}
+
 
 /* ── PANNELLO DOSSIER (statistiche) ────────────────────────────── */
 /*
@@ -251,7 +265,7 @@
 /* ── PANNELLO SCENA (testo narrativo) ──────────────────────────── */
 
 .pannello-scena {
-    -fx-background-color: #111111;
+    -fx-background-color: rgba(17, 17, 17, 0.6);
     -fx-border-color: #2a2a2a;
     -fx-border-width: 1px;
     -fx-border-radius: 2px;
@@ -301,7 +315,7 @@
 
 /* Area interattiva della mappa: sfondo leggermente più freddo del root */
 .area-mappa {
-    -fx-background-color: #0a0c10;
+    -fx-background-color: transparent;
 }
 
 /* Striscia superiore con il titolo della schermata */

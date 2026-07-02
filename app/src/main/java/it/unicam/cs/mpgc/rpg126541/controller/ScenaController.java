@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg126541.controller;
 
+import it.unicam.cs.mpgc.rpg126541.dto.LuogoDTO;
 import it.unicam.cs.mpgc.rpg126541.dto.SceltaDTO;
 import it.unicam.cs.mpgc.rpg126541.dto.ScenaDTO;
 import it.unicam.cs.mpgc.rpg126541.dto.StatisticheDTO;
@@ -13,9 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +33,9 @@ public class ScenaController {
 
     @FXML private Label labelTestoScena;
     @FXML private VBox pannelloScelte;
+    @FXML private ImageView imageSfondoScena;
+
+    private static final String SFONDO_FALLBACK = "/it/unicam/cs/mpgc/rpg126541/immagini/sfondo_scena.png";
 
     @FXML private Label labelNome;
     @FXML private Label labelRango;
@@ -51,7 +58,37 @@ public class ScenaController {
     public void setServizi(GiocoService giocoService, RepositoryPartita repositoryPartita) {
         this.giocoService = giocoService;
         this.repositoryPartita = repositoryPartita;
+        caricaSfondoMissione();
         mostraScenaCorrente();
+    }
+
+    /**
+     * Carica lo sfondo del luogo in cui si svolge la missione corrente,
+     * usando la stessa mappa id luogo → immagine di MappaController.
+     * Se il luogo o l'immagine non si trovano, usa sfondo_scena.png come fallback.
+     */
+    private void caricaSfondoMissione() {
+        String idMissioneCorrente = giocoService.getPartita().getIdMissioneCorrente();
+
+        String percorso = giocoService.getLuoghiDTO().stream()
+                .filter(luogo -> luogo.idMissione() != null && luogo.idMissione().equals(idMissioneCorrente))
+                .map(LuogoDTO::id)
+                .map(MappaController.IMMAGINI_LUOGHI::get)
+                .filter(p -> p != null)
+                .findFirst()
+                .orElse(SFONDO_FALLBACK);
+
+        try {
+            URL url = getClass().getResource(percorso);
+            if (url == null) {
+                url = getClass().getResource(SFONDO_FALLBACK);
+            }
+            if (url != null) {
+                imageSfondoScena.setImage(new Image(url.toExternalForm()));
+            }
+        } catch (Exception e) {
+            System.err.println("[Scena] Impossibile caricare lo sfondo della missione: " + e.getMessage());
+        }
     }
 
     /** Aggiorna testo, statistiche e bottoni in base alla scena corrente del service. */

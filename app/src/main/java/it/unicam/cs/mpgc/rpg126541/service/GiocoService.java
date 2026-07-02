@@ -50,4 +50,13 @@ public interface GiocoService {
 
     /** Restituisce la lista dei luoghi della mappa come DTO, pronti per la view. */
     List<LuogoDTO> getLuoghiDTO();
+
+    /** Restituisce true se la missione indicata è già stata completata. */
+    boolean missioneCompletata(String idMissione);
+
+    /**
+     * Restituisce true se la missione indicata può essere iniziata, ovvero se è la prima
+     * della storia oppure se la missione che la precede nell'ordine narrativo è completata.
+     */
+    boolean missioneDisponibile(String idMissione);
 }

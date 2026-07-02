@@ -40,6 +40,14 @@ public class GiocoServiceImpl implements GiocoService {
               && p.getGiocatore().getStatistica(TipoStatistica.LEALTA) >= 90
               && p.flagUguale("missione_resa_dei_conti_completata", "true");
 
+    // Ordine narrativo fisso: una missione è disponibile solo se la precedente è completata.
+    private static final List<String> ORDINE_MISSIONI = List.of(
+            "missione_primo_incontro",
+            "missione_guardia_corrotta",
+            "missione_traditore",
+            "missione_resa_dei_conti"
+    );
+
     private final List<Missione> missioni;
     private final List<Luogo> luoghi;
     private Partita partita;
@@ -133,6 +141,20 @@ public class GiocoServiceImpl implements GiocoService {
                 .map(l -> new LuogoDTO(l.getId(), l.getNome(), l.getDescrizione(),
                         l.haMissione(), l.getIdMissione()))
                 .toList();
+    }
+
+    @Override
+    public boolean missioneCompletata(String idMissione) {
+        return partita.flagUguale(idMissione + "_completata", "true");
+    }
+
+    @Override
+    public boolean missioneDisponibile(String idMissione) {
+        int indice = ORDINE_MISSIONI.indexOf(idMissione);
+        if (indice <= 0) {
+            return true;
+        }
+        return missioneCompletata(ORDINE_MISSIONI.get(indice - 1));
     }
 
     // --- metodi privati di supporto ---
